@@ -1,8 +1,14 @@
+var clickCounter = 0;
+
 $(document).ready(function(){
-  $('#generate').on('click', genDiv);
+  $('#generate').on('click', function(){
+    genDiv();
+
+  });
 });
 
 function genDiv(){
-  $(document.body).append($('<div>'));//.attr('id', 'div1'));
-  
+  clickCounter++;
+  $(document.body).append($('<div>').addClass('madeByGenerateBtn'+ ' ' +clickCounter));
+  $('.1').html($('<p>').text(clickCounter));
 }
