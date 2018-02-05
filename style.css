@@ -1,3 +1,15 @@
-.madeByGenerateBtn {
-  
+.generated {
+  background-color: red;
+  display: block;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+p {
+  font-family: sans-serif;
+  font-size: 28px;
+  text-align: center;
+  color: white;
 }
