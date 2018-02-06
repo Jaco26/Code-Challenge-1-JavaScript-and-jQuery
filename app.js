@@ -14,35 +14,28 @@
 
 // 8 Clicking a "Delete" <button> should remove its parent <div> container (and all of its contents).
 
-var generatedElementsArray = [];
-var clickCounter = 0;
+$(document).ready(readyNow);
 
-$(document).ready(function(){
-  $('#generate').on('click', function(){ // when the #generate button is clicked...
-    genDiv();
+function readyNow(){
+  let clickCounter = 0;
+  $('#generate').on('click', function () {
+    clickCounter++;
+    $div = $('<div>').addClass('red').append($('<p>').text(clickCounter));
+    $div.append($('<button>').text('Swap').addClass('swap'), $('<button>').text('Delete').addClass('delete'));
+    $('body').append($div);
   });
-  $(document.body).on('click', '.swapBtn', function(){
-    $(this).parent().toggleClass('yellow');
-    if($(this).parent().hasClass('yellow')){
-      $(this).siblings().css({'color':'black'});
-    } else {
-      $(this).siblings('p').css({'color':'white'});
-    }
+
+  $('body').on('click', '.swap', function(){
+   if($(this).parent().hasClass('yellow')){
+     $(this).parent().removeClass('yellow').addClass('red');
+   } else if ($(this).parent().hasClass('red')){
+     $(this).parent().removeClass('red').addClass('yellow');
+     console.log('hey');
+   }
   });
-  $(document.body).on('click', '.deleteBtn', function(){
+
+  $('body').on('click', '.delete', function(){
     $(this).parent().remove();
-    generatedElementsArray.splice($(this).parent().attr('class'), 1);
   });
-});
+}
 
-function genDiv(){
-  clickCounter++;
-  $div = $('<div>').addClass('generated '+clickCounter);
-  $div.html($('<p>').text(clickCounter));
-  $div.append($('<button>').addClass('swapBtn').text('Swap'));
-  $div.append($('<button>').addClass('deleteBtn').text('delete'));
-  generatedElementsArray.push($div);
-  generatedElementsArray.forEach(div => {
-    $(document.body).append(div);
-  });
-} // end genDiv
